@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category - VOLTECHS STORE</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="announcement-bar">
+        <div class="container">
+            <div style="display:flex;gap:20px;">
+                <span>&#9889; Power Your Devices</span>
+                <span>&#128230; Fast Delivery</span>
+                <span>&#10003; 100% Original Products</span>
+            </div>
+            <div class="announcement-links">
+                <a href="#">Track Order</a>
+                <a href="help.html">Help &amp; Support</a>
+                <a href="https://wa.me/201000700965" target="_blank">+201000700965</a>
+            </div>
+        </div>
+    </div>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo" id="logo-container"></a>
+            <div class="search-bar"><input type="text" id="search-input" placeholder="Search for iPhone accessories..." autocomplete="off"><button id="search-btn">&#128269;</button><div class="search-suggestions" id="search-suggestions"></div></div>
+            <div class="header-actions">
+                <div id="header-social-container"></div>
+                <a href="account.html" class="header-btn">&#128100; <span class="btn-label">Account</span></a>
+                <a href="cart.html" class="header-btn cart-btn">&#128722; <span class="btn-label">Cart</span> <span class="cart-count">0</span></a>
+            </div>
+        </div>
+    </header>
+    <nav class="nav-bar"><div class="container" id="nav-container"></div></nav>
+    <div class="main-layout">
+        <aside class="sidebar">
+            <div class="sidebar-title">Categories</div>
+            <div id="sidebar-container"></div>
+            <div class="sidebar-badge"><div class="badge-icon">&#10003;</div><p>100% Original Products</p><span>Every item sourced directly from brands</span></div>
+        </aside>
+        <main class="content">
+            <div class="page-header">
+                <div class="breadcrumb"><a href="index.html">Home</a> <span>&rsaquo;</span> <span id="breadcrumb-cat">Category</span></div>
+                <h1 class="page-title" id="page-title">Category</h1>
+                <p class="page-description" id="page-desc"></p>
+            </div>
+            <div class="filter-bar" id="filter-bar">
+                <div class="results-count">Showing <strong id="results-count">0</strong> products</div>
+                <select class="sort-select" id="sort-select">
+                    <option value="featured">Sort by: Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="rating">Highest Rated</option>
+                    <option value="reviews">Most Reviews</option>
+                </select>
+            </div>
+            <div class="apple-tabs" id="apple-tabs" style="display:none;"></div>
+            <div class="all-products-grid" id="products-grid"></div>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><div class="logo" id="footer-logo-container"></div><p>Your trusted destination for premium tech accessories.</p></div>
+                <div class="footer-col"><h4>Shop</h4><a href="category.html?cat=apple">Apple</a><a href="category.html?cat=cables">Cables</a><a href="category.html?cat=chargers">Chargers</a><a href="category.html?cat=powerbanks">Power Banks</a><a href="category.html?cat=cases">Cases</a><a href="category.html?cat=protectors">Screen Protectors</a><a href="category.html?cat=ipadaccessories">iPad Accessories</a></div>
+                <div class="footer-col"><h4>Support</h4><a href="#">Contact Us</a><a href="#">FAQs</a><a href="#">Shipping Info</a><a href="#">Returns</a><a href="#">Track Order</a></div>
+                <div class="footer-col"><h4>Company</h4><a href="#">About Us</a><a href="#">Blog</a><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 VOLTECHS STORE. All rights reserved.</p></div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+        var catKey = getUrlParam('cat') || 'cables';
+        var catInfo = CATEGORIES[catKey] || { name: 'All Products', tagline: 'Browse our complete collection.' };
+
+        document.getElementById('logo-container').innerHTML = buildLogoHTML();
+        document.getElementById('footer-logo-container').innerHTML = buildLogoHTML();
+        document.getElementById('nav-container').innerHTML = buildNavLinks('category');
+        document.getElementById('sidebar-container').innerHTML = buildSidebarLinks(catKey);
+        document.getElementById('breadcrumb-cat').textContent = catInfo.name;
+        document.getElementById('page-title').textContent = catInfo.name;
+        document.getElementById('page-desc').textContent = catInfo.tagline;
+        document.title = catInfo.name + ' - VOLTECHS STORE';
+
+        var categoryProducts = PRODUCTS.filter(function(p) { return p.category === catKey; });
+
+        function renderProducts(products) {
+            document.getElementById('results-count').textContent = products.length;
+            document.getElementById('products-grid').innerHTML = products.length > 0
+                ? products.map(renderProductCard).join('')
+                : '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;"><div style="font-size:60px;margin-bottom:16px;">&#128230;</div><h3 style="margin-bottom:8px;color:var(--text-secondary);">No products found</h3><a href="shop.html" class="hero-btn" style="display:inline-flex;font-size:14px;padding:12px 24px;">Browse All Products &#8594;</a></div>';
+        }
+
+        if (catKey === 'apple') {
+            /* Special tabbed layout: New & Used iPhones / Used iPads (out of stock) / Used MacBooks */
+            document.getElementById('filter-bar').style.display = 'none';
+
+            var APPLE_TABS = [
+                { key: 'iphones', label: 'New & Used iPhones' },
+                { key: 'ipads', label: 'Used iPads' },
+                { key: 'macbooks', label: 'Used MacBooks' },
+                { key: 'airpods', label: 'AirPods' }
+            ];
+            var activeTab = APPLE_TABS[0].key;
+
+            function renderAppleTabs() {
+                var tabsEl = document.getElementById('apple-tabs');
+                tabsEl.style.display = 'flex';
+                tabsEl.innerHTML = APPLE_TABS.map(function(t) {
+                    return '<div class="apple-tab' + (t.key === activeTab ? ' active' : '') + '" data-tab="' + t.key + '">' + t.label + '</div>';
+                }).join('');
+                tabsEl.querySelectorAll('.apple-tab').forEach(function(el) {
+                    el.addEventListener('click', function() {
+                        activeTab = el.dataset.tab;
+                        renderAppleTabs();
+                        renderAppleTabContent();
+                    });
+                });
+            }
+
+            function renderAppleTabContent() {
+                var items = categoryProducts.filter(function(p) { return p.subcategory === activeTab; });
+                if (activeTab === 'ipads') {
+                    document.getElementById('results-count').textContent = 0;
+                    document.getElementById('products-grid').innerHTML =
+                        '<div class="apple-empty-state">' +
+                            '<div class="icon">&#128241;</div>' +
+                            '<h3>Out of stock for now</h3>' +
+                            '<p>We don\'t have any used iPads listed at the moment &mdash; check back soon or contact us for updates.</p>' +
+                        '</div>';
+                } else {
+                    renderProducts(items);
+                }
+            }
+
+            renderAppleTabs();
+            renderAppleTabContent();
+        } else if (catKey === 'ipad') {
+            /* iPad category: sub-tabs for Cases & Covers / Screen Protectors / Cables & Adapters */
+            document.getElementById('filter-bar').style.display = 'none';
+
+            var IPAD_TABS = [
+                { key: 'covers', label: 'Cases & Covers' },
+                { key: 'protectors', label: 'Screen Protectors' },
+                { key: 'cables', label: 'Cables & Adapters' }
+            ];
+            var activeIpadTab = IPAD_TABS[0].key;
+
+            function renderIpadTabs() {
+                var tabsEl = document.getElementById('apple-tabs');
+                tabsEl.style.display = 'flex';
+                tabsEl.innerHTML = IPAD_TABS.map(function(t) {
+                    return '<div class="apple-tab' + (t.key === activeIpadTab ? ' active' : '') + '" data-tab="' + t.key + '">' + t.label + '</div>';
+                }).join('');
+                tabsEl.querySelectorAll('.apple-tab').forEach(function(el) {
+                    el.addEventListener('click', function() {
+                        activeIpadTab = el.dataset.tab;
+                        renderIpadTabs();
+                        renderIpadTabContent();
+                    });
+                });
+            }
+
+            function renderIpadTabContent() {
+                var items = categoryProducts.filter(function(p) { return p.subcategory === activeIpadTab; });
+                renderProducts(items);
+            }
+
+            renderIpadTabs();
+            renderIpadTabContent();
+        } else {
+            document.getElementById('sort-select').addEventListener('change', function() {
+                var sorted = categoryProducts.slice();
+                switch(this.value) {
+                    case 'price-low': sorted.sort(function(a,b){return a.price-b.price;}); break;
+                    case 'price-high': sorted.sort(function(a,b){return b.price-a.price;}); break;
+                    case 'rating': sorted.sort(function(a,b){return b.rating-a.rating;}); break;
+                    case 'reviews': sorted.sort(function(a,b){return b.reviews-a.reviews;}); break;
+                }
+                renderProducts(sorted);
+            });
+
+            renderProducts(categoryProducts);
+        }
+    </script>
+</body>
+</html>
