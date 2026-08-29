@@ -35,27 +35,22 @@ function icon(name, size) {
     return '<svg class="icon-svg" viewBox="0 0 24 24" width="' + size + '" height="' + size + '" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICONS[name] || '') + '</svg>';
 }
 
+/* Returns the markup for a product's thumbnail — a real photo (product.image)
+   if one is set, otherwise falls back to the inline SVG icon. */
+function productImageHtml(product) {
+    if (product.image) {
+        return '<img src="' + product.image + '" alt="' + product.name + '" loading="lazy">';
+    }
+    return product.icon || '';
+}
+
 var PRODUCTS = [
-    { id: 1, name: "Anker PowerPort III 20W USB-C Adapter", category: "chargers", categoryLabel: "Chargers", price: 999, oldPrice: null, rating: 4.5, reviews: 128, badge: null, icon: icon('plug', 56), description: "Compact 20W USB-C fast charger with PowerIQ 3.0 technology. Charges iPhone 3x faster than standard adapters." },
-    { id: 2, name: "Anker PowerLine III USB-C to Lightning Cable", category: "cables", categoryLabel: "Cables", price: 649, oldPrice: 799, rating: 5.0, reviews: 342, badge: null, icon: icon('cable', 56), description: "Ultra-durable braided nylon cable with double-reinforced stress points. MFi certified for Apple devices." },
-    { id: 3, name: "Belkin BoostCharge 20W USB-C Adapter", category: "chargers", categoryLabel: "Chargers", price: 999, oldPrice: null, rating: 4.0, reviews: 97, badge: null, icon: icon('plug', 56), description: "20W USB-C PD fast charger with foldable prongs. Charges iPhone 14 from 0-50% in 30 minutes." },
-    { id: 4, name: "Belkin USB-C to Lightning Cable (MFi)", category: "cables", categoryLabel: "Cables", price: 749, oldPrice: null, rating: 4.5, reviews: 223, badge: null, icon: icon('cable', 56), description: "Premium braided MFi-certified cable with aluminum connectors. Supports fast charging up to 60W." },
-    { id: 5, name: "Anker 622 Magnetic Battery (MagSafe)", category: "magsafe", categoryLabel: "MagSafe", price: 2499, oldPrice: 2999, rating: 4.5, reviews: 156, badge: null, icon: icon('bolt', 56), description: "Slim 5000mAh MagSafe-compatible wireless battery pack with built-in kickstand. Perfect for on-the-go charging." },
-    { id: 6, name: "Anker Nano Power Bank 5000mAh", category: "powerbanks", categoryLabel: "Power Banks", price: 1299, oldPrice: null, rating: 4.5, reviews: 289, badge: null, icon: icon('battery', 56), description: "Ultra-compact 5000mAh power bank with built-in Lightning connector. Weighs just 100g." },
-    { id: 7, name: "Baseus 20000mAh Power Bank", category: "powerbanks", categoryLabel: "Power Banks", price: 1749, oldPrice: 2249, rating: 4.3, reviews: 178, badge: "sale", icon: icon('battery', 56), description: "High-capacity 20000mAh power bank with 65W PD output. Can charge laptops, tablets, and phones simultaneously." },
-    { id: 8, name: "ESR MagSafe Clear Case (iPhone 15)", category: "cases", categoryLabel: "Phone Cases", price: 799, oldPrice: null, rating: 4.6, reviews: 412, badge: null, icon: icon('phone', 56), description: "Crystal-clear polycarbonate case with MagSafe ring. Military-grade drop protection with 10ft defense rating." },
-    { id: 9, name: "Spigen Tough Armor (iPhone 15 Pro)", category: "cases", categoryLabel: "Phone Cases", price: 999, oldPrice: null, rating: 4.7, reviews: 567, badge: null, icon: icon('phone', 56), description: "Dual-layer defense with foam interior and kickstand. Air Cushion Technology for corner protection." },
-    { id: 10, name: "amFilm Tempered Glass (3-Pack)", category: "protectors", categoryLabel: "Screen Protectors", price: 499, oldPrice: null, rating: 4.4, reviews: 891, badge: null, icon: icon('shield-check', 56), description: "0.33mm ultra-thin tempered glass with 9H hardness. Includes alignment frame for perfect installation." },
-    { id: 11, name: "Torras Diamond Shield Screen Protector", category: "protectors", categoryLabel: "Screen Protectors", price: 749, oldPrice: 999, rating: 4.6, reviews: 234, badge: "sale", icon: icon('shield-check', 56), description: "Nano-coating oleophobic layer resists fingerprints. 99.99% HD clarity with touch accuracy." },
-    { id: 12, name: "Anker 3-in-1 Cube MagSafe Charger", category: "magsafe", categoryLabel: "MagSafe", price: 1799, oldPrice: null, rating: 4.4, reviews: 189, badge: null, icon: icon('bolt', 56), description: "Charges iPhone, Apple Watch, and AirPods simultaneously. Compact foldable design for travel." },
-    { id: 13, name: "Belkin MagSafe 2-in-1 Wireless Charger", category: "magsafe", categoryLabel: "MagSafe", price: 1999, oldPrice: null, rating: 4.3, reviews: 145, badge: "new", icon: icon('bolt', 56), description: "Fast wireless charging for iPhone and AirPods. Premium silicone base with non-slip design." },
-    { id: 14, name: "Anker Soundcore Liberty 4 NC", category: "audio", categoryLabel: "Headphones & AirPods", price: 3999, oldPrice: 4999, rating: 4.5, reviews: 523, badge: null, icon: icon('headphones', 56), description: "Hybrid active noise cancelling with 98% noise reduction. Hi-Res Audio certified with LDAC support." },
-    { id: 15, name: "JBL Tune 510BT Wireless Headphones", category: "audio", categoryLabel: "Headphones & AirPods", price: 1499, oldPrice: null, rating: 4.3, reviews: 1205, badge: null, icon: icon('headphones', 56), description: "Pure Bass sound with up to 40 hours of battery. Foldable lightweight design with multipoint connection." },
-    { id: 16, name: "Anker 521 Magnetic Battery (MagSafe)", category: "powerbanks", categoryLabel: "Power Banks", price: 1499, oldPrice: null, rating: 4.4, reviews: 201, badge: null, icon: icon('battery', 56), description: "3400mAh snap-on MagSafe battery with LED indicator. Charges iPhone 14 to 80% in one charge." },
-    { id: 17, name: "Spigen Ultra Hybrid Case (Pixel 8)", category: "cases", categoryLabel: "Phone Cases", price: 649, oldPrice: null, rating: 4.5, reviews: 312, badge: "new", icon: icon('phone', 56), description: "Crystal clear hybrid case with air cushion technology. Wireless charging compatible with precision cutouts." },
-    { id: 18, name: "Belkin BoostCharge Pro 3-in-1 Pad", category: "magsafe", categoryLabel: "MagSafe", price: 6499, oldPrice: 7499, rating: 4.6, reviews: 89, badge: "sale", icon: icon('bolt', 56), description: "Premium wireless charging station for iPhone, Apple Watch, and AirPods. Nightstand mode compatible." },
-    { id: 19, name: "Anker PowerLine+ III 2-in-1 Cable", category: "cables", categoryLabel: "Cables", price: 899, oldPrice: null, rating: 4.5, reviews: 156, badge: null, icon: icon('cable', 56), description: "USB-C to Lightning + USB-C to USB-C in one cable. Premium braided design with 60W PD support." },
-    { id: 20, name: "Anker Nano II 65W USB-C Charger", category: "chargers", categoryLabel: "Chargers", price: 1799, oldPrice: 2099, rating: 4.7, reviews: 678, badge: null, icon: icon('plug', 56), description: "GaN II technology charges 3 devices simultaneously. 65W output powers MacBook Air and all USB-C devices." }
+    { id: 1, name: "Anker Smart 45W GaN Charger with Display", category: "chargers", categoryLabel: "Chargers", price: 1599, oldPrice: null, rating: 4.7, reviews: 0, badge: "new", image: "images/products/anker-smart-45w-charger.png", description: "45W GaN fast charger with a built-in smart display that shows live charging status and connected device. Foldable prongs, compatible with iPhone 17 down to iPhone 8 and all USB-C devices." },
+    { id: 2, name: "Dior Oblique Monogram iPhone Case", category: "cases", categoryLabel: "Phone Cases", price: 549, oldPrice: null, rating: 4.6, reviews: 0, badge: "new", image: "images/products/dior-case.jpg", models: ["14 Pro","14 Pro Max","15","15 Pro","15 Pro Max","16","16 Pro","16 Pro Max","17","17 Pro","17 Pro Max"], description: "Designer-inspired oblique monogram case with raised camera bumper and metal logo detail. Soft-touch fabric finish over a protective TPU shell." },
+    { id: 3, name: "Gear4 Crystal Palace Clear Case", category: "cases", categoryLabel: "Phone Cases", price: 1299, oldPrice: null, rating: 4.5, reviews: 0, badge: null, image: "images/products/gear4-case.png", models: ["14 Pro","14 Pro Max","15","15 Pro","15 Pro Max","16","16 Pro","16 Pro Max","17","17 Pro","17 Pro Max"], description: "Ultra-clear case with D3O impact protection technology, engineered to survive multiple drops without yellowing. Raised edges protect the screen and camera." },
+    { id: 4, name: "Guess 4G Card Holder iPhone Case", category: "cases", categoryLabel: "Phone Cases", price: 1599, oldPrice: null, rating: 4.5, reviews: 0, badge: null, image: "images/products/guess-case.jpg", models: ["14 Pro","14 Pro Max","15","15 Pro","15 Pro Max","16","16 Pro","16 Pro Max","17","17 Pro","17 Pro Max"], description: "Licensed Guess 4G monogram case with a built-in card slot and signature metal triangle logo. PU leather finish over a protective hard shell." },
+    { id: 5, name: "Louis Vuitton Monogram Card Holder Case", category: "cases", categoryLabel: "Phone Cases", price: 649, oldPrice: null, rating: 4.4, reviews: 0, badge: "new", image: "images/products/lv-case.jpg", models: ["14 Pro","14 Pro Max","15","15 Pro","15 Pro Max","16","16 Pro","16 Pro Max","17","17 Pro","17 Pro Max"], description: "Designer-inspired monogram case with a built-in card slot pocket. Textured canvas print finish with gold-tone logo hardware over a protective shell." },
+    { id: 6, name: "PITAKA MagEZ Aramid Fiber Case", category: "cases", categoryLabel: "Phone Cases", price: 2799, oldPrice: null, rating: 4.8, reviews: 0, badge: "sale", image: "images/products/pitaka-case.png", models: ["14 Pro","14 Pro Max","15","15 Pro","15 Pro Max","16","16 Pro","16 Pro Max","17","17 Pro","17 Pro Max"], description: "Ultra-thin, ultra-light case woven from real aramid fiber for a case-less feel. MagSafe compatible with a 3D-textured non-slip grip and raised camera lip." }
 ];
 
 /* Category order: Phone Cases, Chargers, Screen Protectors first, then the rest. "Smart Home" removed. */
@@ -87,8 +82,8 @@ function renderProductCard(product) {
     var favActive = isFavorite(product.id) ? ' active' : '';
     return '<a href="product.html?id=' + product.id + '" class="product-card" style="text-decoration:none;color:inherit;">'
         + badgeHtml
-        + '<button class="fav-btn' + favActive + '" data-fav-id="' + product.id + '" onclick="event.preventDefault();event.stopPropagation();toggleFavorite(' + product.id + ', this)" title="Add to Favorites">' + icon('heart', 16) + '</button>'
-        + '<div class="product-image">' + product.icon + '</div>'
+        + '<button class="fav-btn' + favActive + '" data-fav-id="' + product.id + '" onclick="event.preventDefault();event.stopPropagation();toggleFavorite(' + product.id + ', this)" title="Add to Favorites">' + icon('heart', 12) + '</button>'
+        + '<div class="product-image">' + productImageHtml(product) + '</div>'
         + '<div class="product-info">'
         + '<div class="product-category">' + product.categoryLabel + '</div>'
         + '<div class="product-name">' + product.name + '</div>'
@@ -155,27 +150,30 @@ function saveCart(cart) {
     updateCartBadge();
 }
 
-function addToCart(productId, qty) {
+function addToCart(productId, qty, variant) {
     qty = qty || 1;
+    variant = variant || null;
     var cart = getCart();
     var entry = null;
-    for (var i = 0; i < cart.length; i++) { if (cart[i].id === productId) { entry = cart[i]; break; } }
-    if (entry) { entry.qty += qty; } else { cart.push({ id: productId, qty: qty }); }
+    for (var i = 0; i < cart.length; i++) { if (cart[i].id === productId && (cart[i].variant || null) === variant) { entry = cart[i]; break; } }
+    if (entry) { entry.qty += qty; } else { cart.push({ id: productId, qty: qty, variant: variant }); }
     saveCart(cart);
     if (typeof renderCartDrawer === 'function') renderCartDrawer();
     flashCartButton();
 }
 
-function removeFromCart(productId) {
-    var cart = getCart().filter(function(c) { return c.id !== productId; });
+function removeFromCart(productId, variant) {
+    variant = variant || null;
+    var cart = getCart().filter(function(c) { return !(c.id === productId && (c.variant || null) === variant); });
     saveCart(cart);
     renderCartDrawer();
 }
 
-function setCartQty(productId, qty) {
+function setCartQty(productId, qty, variant) {
+    variant = variant || null;
     var cart = getCart();
     for (var i = 0; i < cart.length; i++) {
-        if (cart[i].id === productId) {
+        if (cart[i].id === productId && (cart[i].variant || null) === variant) {
             cart[i].qty = qty;
             if (cart[i].qty < 1) cart.splice(i, 1);
             break;
@@ -188,7 +186,7 @@ function setCartQty(productId, qty) {
 function getCartDetailed() {
     return getCart().map(function(c) {
         var p = getProductById(c.id);
-        return p ? { product: p, qty: c.qty, lineTotal: p.price * c.qty } : null;
+        return p ? { product: p, qty: c.qty, variant: c.variant || null, lineTotal: p.price * c.qty } : null;
     }).filter(Boolean);
 }
 
@@ -213,18 +211,21 @@ function flashCartButton() {
 }
 
 function cartItemRowHtml(d) {
+    var variantHtml = d.variant ? '<div class="cart-item-variant" style="font-size:12px;color:var(--text-muted);">Model: ' + d.variant + '</div>' : '';
+    var vArg = d.variant ? ",'" + d.variant.replace(/'/g, "\\'") + "'" : ',null';
     return '<div class="cart-item">' +
-        '<div class="cart-item-img">' + d.product.icon + '</div>' +
+        '<div class="cart-item-img">' + productImageHtml(d.product) + '</div>' +
         '<div class="cart-item-info">' +
             '<div class="cart-item-name">' + d.product.name + '</div>' +
+            variantHtml +
             '<div class="cart-item-price">EGP ' + d.lineTotal.toLocaleString() + '</div>' +
             '<div class="cart-item-row">' +
                 '<div class="cart-item-qty">' +
-                    '<button onclick="setCartQty(' + d.product.id + ',' + (d.qty - 1) + ')">' + icon('minus', 14) + '</button>' +
+                    '<button onclick="setCartQty(' + d.product.id + ',' + (d.qty - 1) + vArg + ')">' + icon('minus', 14) + '</button>' +
                     '<span>' + d.qty + '</span>' +
-                    '<button onclick="setCartQty(' + d.product.id + ',' + (d.qty + 1) + ')">' + icon('plus', 14) + '</button>' +
+                    '<button onclick="setCartQty(' + d.product.id + ',' + (d.qty + 1) + vArg + ')">' + icon('plus', 14) + '</button>' +
                 '</div>' +
-                '<button class="cart-item-remove" onclick="removeFromCart(' + d.product.id + ')">Remove</button>' +
+                '<button class="cart-item-remove" onclick="removeFromCart(' + d.product.id + vArg + ')">Remove</button>' +
             '</div>' +
         '</div>' +
     '</div>';
@@ -274,7 +275,7 @@ function renderCheckoutForm() {
 
     var total = getCartTotal();
     var summaryHtml = '<div class="checkout-order-summary">' +
-        items.map(function(d) { return '<div><span>' + d.qty + '&times; ' + d.product.name + '</span><span>EGP ' + d.lineTotal.toLocaleString() + '</span></div>'; }).join('') +
+        items.map(function(d) { return '<div><span>' + d.qty + '&times; ' + d.product.name + (d.variant ? ' (' + d.variant + ')' : '') + '</span><span>EGP ' + d.lineTotal.toLocaleString() + '</span></div>'; }).join('') +
         '<div class="cos-total"><span>Total</span><span>EGP ' + total.toLocaleString() + '</span></div>' +
     '</div>';
 
@@ -358,7 +359,7 @@ function submitOrder() {
     if (payMethod === 'instapay' && instapayRef) bodyLines.push('InstaPay Ref: ' + instapayRef);
     bodyLines.push('');
     bodyLines.push('Items:');
-    items.forEach(function(d) { bodyLines.push('- ' + d.qty + 'x ' + d.product.name + ' — EGP ' + d.lineTotal.toLocaleString()); });
+    items.forEach(function(d) { bodyLines.push('- ' + d.qty + 'x ' + d.product.name + (d.variant ? ' (' + d.variant + ')' : '') + ' — EGP ' + d.lineTotal.toLocaleString()); });
     bodyLines.push('');
     bodyLines.push('TOTAL: EGP ' + total.toLocaleString());
 
@@ -396,7 +397,7 @@ function submitOrder() {
         payment_method: payLabel,
         instapay_ref: instapayRef || '(none)',
         total: 'EGP ' + total.toLocaleString(),
-        items: items.map(function(d) { return d.qty + 'x ' + d.product.name + ' — EGP ' + d.lineTotal.toLocaleString(); }).join('\n'),
+        items: items.map(function(d) { return d.qty + 'x ' + d.product.name + (d.variant ? ' (' + d.variant + ')' : '') + ' — EGP ' + d.lineTotal.toLocaleString(); }).join('\n'),
         order_summary: messageText,
         reply_to: email
     };
@@ -528,7 +529,7 @@ function initFavUI() {
 
 function favItemRowHtml(p) {
     return '<div class="cart-item">' +
-        '<div class="cart-item-img">' + p.icon + '</div>' +
+        '<div class="cart-item-img">' + productImageHtml(p) + '</div>' +
         '<a href="product.html?id=' + p.id + '" class="cart-item-info" style="text-decoration:none;color:inherit;">' +
             '<div class="cart-item-name">' + p.name + '</div>' +
             '<div class="cart-item-price">EGP ' + p.price.toLocaleString() + '</div>' +
@@ -596,7 +597,7 @@ function initSearchBar() {
             } else {
                 dd.innerHTML = matches.map(function(p) {
                     return '<div class="sugg-item" data-id="' + p.id + '">' +
-                        '<div class="sugg-img">' + p.icon + '</div>' +
+                        '<div class="sugg-img">' + productImageHtml(p) + '</div>' +
                         '<div class="sugg-info"><div class="sugg-name">' + p.name + '</div><div class="sugg-cat">' + p.categoryLabel + '</div></div>' +
                         '<div class="sugg-price">EGP ' + p.price.toLocaleString() + '</div>' +
                     '</div>';
