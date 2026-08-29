@@ -32,8 +32,8 @@ button { cursor: pointer; border: none; outline: none; font-family: inherit; }
 .header-actions { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
 .header-btn { background: var(--bg-card); color: var(--text-primary); border: 1px solid var(--border); padding: 10px 16px; border-radius: 10px; font-size: 13px; display: flex; align-items: center; gap: 8px; transition: all 0.2s; box-shadow: var(--card-shadow); }
 .header-btn:hover { border-color: var(--accent); background: var(--bg-hover); }
-.cart-btn { position: relative; }
-.cart-count, .fav-count { position: absolute; top: -6px; right: -6px; background: var(--accent); color: white; font-size: 10px; font-weight: 700; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+.cart-btn, .fav-btn-header { position: relative; }
+.cart-count, .fav-count { position: absolute; top: -8px; right: -8px; background: var(--accent); color: white; font-size: 10px; font-weight: 700; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
 .header-btn .icon-only { display: none; }
 
 /* Mobile icon-circle header buttons */
