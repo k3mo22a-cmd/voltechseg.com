@@ -451,22 +451,30 @@ function sendWhatsAppConfirmation(params) {
         customerPhone = '20' + customerPhone.slice(-10); // Ensure it starts with 20
     }
 
-    var message = '*🎉 Thank you for your order from VOLTECHS STORE!*\n\n';
-    message += 'This is a confirmation message.\n\n';
-    message += '*Order Details:*\n\n';
-    message += '📋 *Order ID:* ' + params.order_id + '\n';
-    message += '👤 *Name:* ' + params.name + '\n';
-    message += '📱 *Phone:* ' + params.phone + '\n';
-    message += '📧 *Email:* ' + params.email + '\n';
-    message += '📍 *Governorate:* ' + params.governorate + '\n';
-    message += '🏠 *Address:* ' + params.address + '\n\n';
-    message += '*Items:*\n' + params.items + '\n\n';
-    message += '💰 *Subtotal:* ' + params.total + '\n';
-    message += '💳 *Payment Method:* ' + params.payment_method + '\n\n';
-    message += 'We will confirm your order once we receive the deposit/payment.\n';
-    message += 'Send the deposit screenshot once done.\n\n';
-    message += '✅ Thank you for shopping with us!\n';
-    message += 'For support, contact us anytime.';
+    var message = `🎉 Thank you for your order from VOLTECHS STORE!
+
+This is a confirmation message.
+
+📋 Order Details:
+
+🆔 Order ID: ${params.order_id}
+👤 Name: ${params.name}
+📱 Phone: ${params.phone}
+📍 Governorate: ${params.governorate}
+🏠 Address: ${params.address}
+
+🛍️ Items:
+${params.items}
+
+💰 Subtotal: ${params.total}
+💳 Payment Method: ${params.payment_method}
+
+We will confirm your order once we receive the deposit/payment.
+
+📸 Send the deposit screenshot once done.
+
+✅ Thank you for shopping with VOLTECHS STORE!
+For support, contact us anytime.`;
 
     var url = 'https://api.ultramsg.com/' + ULTRAMSG_INSTANCE_ID + '/messages/chat';
     
