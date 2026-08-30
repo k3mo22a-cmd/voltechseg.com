@@ -1,42 +1,27 @@
-# 🎉 VOLTECHS STORE - Updated WhatsApp Message
-
-## ✨ What's Changed
-
-Your WhatsApp order confirmation message has been **completely redesigned** with a professional, clean format that includes all customer order details automatically.
-
----
-
-## 📱 New Message Format
-
-When a customer places an order, they'll receive this message on WhatsApp:
-
-```
-🎉 Thank you for your order from VOLTECHS STORE!
+ '🎉 Thank you for your order from VOLTECHS STORE!
 
 This is a confirmation message.
 
 📋 Order Details:
 
-🆔 Order ID: ORD-1693482950123
-👤 Name: Ahmed Mostafa
-📱 Phone: 01012345678
-📍 Governorate: Cairo
-🏠 Address: 123 Main St, Building 5, Floor 2, Apt 3
+🆔 Order ID: ${params.order_id}
+👤 Name: ${params.name}
+📱 Phone: ${params.phone}
+📍 Governorate: ${params.governorate}
+🏠 Address: ${params.address}
 
 🛍️ Items:
-1x Dior Oblique Monogram iPhone Case (15 Pro) — EGP 250
-1x Screen Protector — EGP 50
+${params.items}
 
-💰 Subtotal: EGP 300
-💳 Payment Method: InstaPay
+💰 Subtotal: ${params.total}
+💳 Payment Method: ${params.payment_method}
 
 We will confirm your order once we receive the deposit/payment.
 
-📸 Send the deposit screenshot once done.
+📸 Send the deposit screenshot if you ordered with insta pay once done.
 
 ✅ Thank you for shopping with VOLTECHS STORE!
-For support, contact us anytime.
-```
+For support, contact us anytime.`;
 
 ---
 
