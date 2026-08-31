@@ -135,7 +135,7 @@ function getUrlParam(name) {
 var EMAILJS_SERVICE_ID = "service_4hd0pn5";
 var EMAILJS_TEMPLATE_ID = "template_gmey22u";
 var ORDER_EMAIL = "voltevhsstore@gmail.com";
-var INSTAPAY_NUMBER = "01000000000"; // TODO: replace with your real Instapay-linked number
+var INSTAPAY_NUMBER = "+201017384374";
 
 /* =========================================================
    ULTRAMSG WHATSAPP INTEGRATION
@@ -293,8 +293,8 @@ function renderCheckoutForm() {
     var prefillEmail = acc ? acc.email : '';
     var prefillPhone = acc && acc.phone ? acc.phone : '';
 
-    var governorates = ["Cairo","Giza","Alexandria","Qalyubia","Sharqia","Dakahlia","Gharbia","Monufia","Beheira","Kafr El Sheikh","Damietta","Port Said","Ismailia","Suez","Faiyum","Beni Suef","Minya","Asyut","Sohag","Qena","Luxor","Aswan","Red Sea","New Valley","Matrouh","North Sinai","South Sinai"];
-    var govOptions = '<option value="">Select governorate...</option>' + governorates.map(function(g) { return '<option value="' + g + '">' + g + '</option>'; }).join('');
+    var governorates = ["Cairo"];
+    var govOptions = governorates.map(function(g) { return '<option value="' + g + '">' + g + '</option>'; }).join('');
 
     body.innerHTML = summaryHtml +
         '<div class="form-group"><label class="form-label">Full Name</label><input type="text" id="co-name" class="form-input" placeholder="e.g. Ahmed Mostafa" value="' + prefillName + '"></div>' +
@@ -302,8 +302,8 @@ function renderCheckoutForm() {
             '<div class="form-group"><label class="form-label">Phone Number</label><input type="tel" id="co-phone" class="form-input" placeholder="01xxxxxxxxx" value="' + prefillPhone + '"></div>' +
             '<div class="form-group"><label class="form-label">Alt. Phone (optional)</label><input type="tel" id="co-phone2" class="form-input" placeholder="01xxxxxxxxx"></div>' +
         '</div>' +
-        '<div class="form-group"><label class="form-label">Email</label><input type="email" id="co-email" class="form-input" placeholder="you@example.com" value="' + prefillEmail + '"></div>' +
-        '<div class="form-group"><label class="form-label">Governorate</label><select id="co-governorate" class="form-input">' + govOptions + '</select></div>' +
+        '<div class="form-group"><label class="form-label">Email <span class="required-star">*</span></label><input type="email" id="co-email" class="form-input" placeholder="you@example.com" value="' + prefillEmail + '" required></div>' +
+        '<div class="form-group"><label class="form-label">Governorate</label><select id="co-governorate" class="form-input">' + govOptions + '</select><div class="gov-note">Sorry, we only deliver to Cairo at this time 🙏</div></div>' +
         '<div class="form-group"><label class="form-label">Delivery Address</label><textarea id="co-address" class="form-textarea" placeholder="Street, building, floor/apt, city, nearest landmark..."></textarea></div>' +
         '<div class="form-group"><label class="form-label">Order Notes (optional)</label><textarea id="co-notes" class="form-textarea" placeholder="Preferred delivery time, gift note, special instructions..."></textarea></div>' +
         '<div class="form-error" id="co-error">Please fill in all required fields: name, phone, email, governorate, and address.</div>' +
@@ -344,7 +344,22 @@ function submitOrder() {
     var payMethod = document.querySelector('input[name="pay-method"]:checked').value;
     var instapayRef = document.getElementById('co-instapay-ref') ? document.getElementById('co-instapay-ref').value.trim() : '';
 
-    if (!name || !phone || !email || !governorate || !address) {
+    var emailInput = document.getElementById('co-email');
+    var emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+
+    if (!email || !emailValid) {
+        emailInput.classList.add('field-error');
+        document.getElementById('co-error').textContent = !email
+            ? 'Email is required — please enter your email to place an order.'
+            : 'Please enter a valid email address.';
+        document.getElementById('co-error').classList.add('show');
+        emailInput.focus();
+        return;
+    }
+    emailInput.classList.remove('field-error');
+
+    if (!name || !phone || !governorate || !address) {
+        document.getElementById('co-error').textContent = 'Please fill in all required fields: name, phone, email, governorate, and address.';
         document.getElementById('co-error').classList.add('show');
         return;
     }
