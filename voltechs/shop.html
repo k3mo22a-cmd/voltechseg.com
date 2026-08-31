@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop All - VOLTECHS STORE</title>
+    <link rel="stylesheet" href="styles.css">
+    <script type="text/javascript"
+            src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <script type="text/javascript">
+       (function(){
+          emailjs.init({
+            publicKey: "AEHfiZMZx0Dkt4Xu2",
+          });
+       })();
+    </script>
+</head>
+<body>
+    <div class="announcement-bar">
+        <div class="container">
+            <div class="announcement-links">
+                <a href="#">Track Order</a>
+                <a href="https://wa.me/201000700965" target="_blank" rel="noopener">Help &amp; Support</a>
+            </div>
+        </div>
+    </div>
+    <header class="header">
+        <div class="container">
+            <a href="index.html" class="logo"><img src="images/logo-icon.png" class="logo-icon-img" alt="Voltechs Store"><img src="images/logo-wordmark.png" class="logo-wordmark-img" alt="VOLTECHS STORE"></a>
+            <div class="search-bar"><input type="text" placeholder="Search for iPhone accessories..."><button><svg class="icon-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg></button></div>
+            <div class="header-actions">
+                <button class="header-btn"><span class="icon-only"><svg class="icon-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg></span><span class="btn-label"><svg class="icon-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c1.5-4 5-6 8-6s6.5 2 8 6"/></svg> Account</span></button>
+                <button class="header-btn fav-btn-header"><span class="icon-only"><svg class="icon-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7-4.35-9.5-8.8C.9 8.4 2.3 5 5.6 4.3c2-.4 3.9.5 5 2.1L12 8l1.4-1.6c1.1-1.6 3-2.5 5-2.1 3.3.7 4.7 4.1 3.1 7.4C19 16.15 12 20.5 12 20.5z"/></svg></span><span class="btn-label"><svg class="icon-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20.5s-7-4.35-9.5-8.8C.9 8.4 2.3 5 5.6 4.3c2-.4 3.9.5 5 2.1L12 8l1.4-1.6c1.1-1.6 3-2.5 5-2.1 3.3.7 4.7 4.1 3.1 7.4C19 16.15 12 20.5 12 20.5z"/></svg> Favorites</span><span class="fav-count">0</span></button>
+                <button class="header-btn cart-btn"><span class="icon-only"><svg class="icon-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2 3h2l2.6 12.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H6"/></svg></span><span class="btn-label"><svg class="icon-svg" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2 3h2l2.6 12.4a2 2 0 0 0 2 1.6h8.8a2 2 0 0 0 2-1.6L21 7H6"/></svg> Cart</span><span class="cart-count">0</span></button>
+            </div>
+        </div>
+    </header>
+    <nav class="nav-bar"><div class="container" id="nav-container"></div></nav>
+    <div class="main-layout">
+        <aside class="sidebar">
+            <div class="sidebar-title">Categories</div>
+            <div id="sidebar-container"></div>
+        </aside>
+        <main class="content">
+            <div class="page-header">
+                <div class="breadcrumb"><a href="index.html">Home</a> <span>&rsaquo;</span> <span>Shop All</span></div>
+                <h1 class="page-title">All Products</h1>
+                <p class="page-description">Browse our complete collection. Every product is verified authentic.</p>
+            </div>
+            <div class="filter-bar">
+                <div class="results-count">Showing <strong id="results-count">0</strong> products</div>
+                <div style="display:flex;gap:10px;align-items:center;">
+                    <select class="sort-select" id="sort-select">
+                        <option value="featured">Sort by: Featured</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="reviews">Most Reviewed</option>
+                    </select>
+                    <select class="sort-select" id="filter-select">
+                        <option value="all">All Categories</option>
+                        <option value="cases">Phone Cases</option>
+                        <option value="chargers">Chargers</option>
+                        <option value="protectors">Screen Protectors</option>
+                        <option value="apple">Apple</option>
+                        <option value="cables">Cables</option>
+                        <option value="powerbanks">Power Banks</option>
+                        <option value="magsafe">MagSafe</option>
+                        <option value="audio">Headphones & AirPods</option>
+                    </select>
+                </div>
+            </div>
+            <div class="all-products-grid" id="products-grid"></div>
+        </main>
+    </div>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand"><div class="logo"><img src="images/logo-icon.png" class="logo-icon-img" alt="Voltechs Store"><img src="images/logo-wordmark.png" class="logo-wordmark-img" alt="VOLTECHS STORE"></div><p>Your trusted destination for premium tech accessories.</p><div class="footer-social">
+    <a href="https://www.instagram.com/voltechseg/" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram"><svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+    <a href="https://www.tiktok.com/@voltechss" target="_blank" rel="noopener" title="TikTok" aria-label="TikTok"><svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3v10.2a3.2 3.2 0 1 1-2.4-3.1"/><path d="M14 3c.3 2.3 2 4 4.5 4.2"/></svg></a>
+    <a href="https://wa.me/201000700965" target="_blank" rel="noopener" title="WhatsApp" aria-label="WhatsApp"><svg class="icon-svg" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20l1.3-3.9A7.9 7.9 0 1 1 8.4 19L4 20z"/><path d="M8.5 8.8c.2-.6.5-.6.8-.6h.6c.2 0 .5 0 .7.5s.8 1.9.8 2 .1.3 0 .5c-.1.2-.2.3-.4.5l-.5.6c-.2.2-.4.4-.2.7.2.3.9 1.4 1.9 2.3 1.3 1.1 2.3 1.5 2.6 1.6.3.1.5.1.7-.1l.7-.9c.2-.3.5-.2.8-.1l1.7.9c.3.1.5.2.5.4 0 .5-.6 1.5-1.4 1.8-.7.3-1.5.4-2.5.1-1-.3-2.3-.8-4-2.4-2.3-2.2-3-4.6-3.1-4.9-.1-.3-.9-1.4-.9-2.4 0-1 .5-1.5.7-1.7z"/></svg></a>
+</div></div>
+                <div class="footer-col"><h4>Shop</h4><a href="category.html?cat=cases">Phone Cases</a><a href="category.html?cat=chargers">Chargers</a><a href="category.html?cat=protectors">Screen Protectors</a><a href="category.html?cat=apple">Apple</a><a href="category.html?cat=cables">Cables</a><a href="category.html?cat=powerbanks">Power Banks</a></div>
+                <div class="footer-col"><h4>Support</h4><a href="#">Contact Us</a><a href="#">FAQs</a><a href="#">Shipping Info</a><a href="#">Returns</a><a href="#">Track Order</a></div>
+                <div class="footer-col"><h4>Company</h4><a href="#">About Us</a><a href="#">Blog</a><a href="#">Privacy Policy</a><a href="#">Terms</a></div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 VOLTECHS STORE. All rights reserved.</p></div>
+        </div>
+    </footer>
+    <script src="script.js"></script>
+    <script>
+        document.getElementById('nav-container').innerHTML = buildNavLinks('shop');
+        document.getElementById('sidebar-container').innerHTML = buildSidebarLinks('');
+
+        var allProducts = PRODUCTS.slice();
+        var currentFilter = 'all';
+        var currentSort = 'featured';
+        var searchQuery = getUrlParam('q') || '';
+
+        if (searchQuery) {
+            document.querySelector('.page-title').textContent = 'Search results for "' + searchQuery + '"';
+            document.querySelector('.page-description').textContent = 'Showing matches across all categories.';
+        }
+
+        function getFiltered() {
+            var base = searchQuery ? searchProducts(searchQuery) : allProducts.slice();
+            var f = currentFilter === 'all' ? base : base.filter(function(p){ return p.category === currentFilter; });
+            switch(currentSort) {
+                case 'price-low': f.sort(function(a,b){return a.price-b.price;}); break;
+                case 'price-high': f.sort(function(a,b){return b.price-a.price;}); break;
+                case 'reviews': f.sort(function(a,b){return getCommentsForProduct(b.id).length-getCommentsForProduct(a.id).length;}); break;
+                default: break;
+            }
+            return f;
+        }
+
+        function render() {
+            var p = getFiltered();
+            document.getElementById('results-count').textContent = p.length;
+            document.getElementById('products-grid').innerHTML = p.length > 0
+                ? p.map(renderProductCard).join('')
+                : '<div style="grid-column:1/-1;text-align:center;padding:60px 20px;"><div style="margin-bottom:16px;display:flex;justify-content:center;color:var(--text-muted);">' + icon('package', 56) + '</div><h3 style="margin-bottom:8px;color:var(--text-secondary);">No products found</h3><p style="color:var(--text-muted);font-size:14px;">Try a different search term or browse all categories.</p></div>';
+        }
+
+        document.getElementById('sort-select').addEventListener('change', function(){ currentSort = this.value; render(); });
+        document.getElementById('filter-select').addEventListener('change', function(){ currentFilter = this.value; render(); });
+        render();
+    </script>
+</body>
+</html>
