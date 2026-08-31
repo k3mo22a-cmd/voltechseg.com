@@ -55,12 +55,12 @@ var PRODUCTS = [
 
 /* Category order: Phone Cases, Chargers, Screen Protectors first, then the rest. "Smart Home" removed. */
 var CATEGORIES = {
-    cases: { name: "Phone Cases", tagline: "Protection meets style.", icon: '<img src="images/cases-icon.jpg" alt="Phone Cases">' },
-    chargers: { name: "Chargers", tagline: "Power up safely, anytime.", icon: '<img src="images/chargers-icon.jpg" alt="Chargers">' },
-    protectors: { name: "Screen Protectors", tagline: "Crystal clear protection.", icon: '<img src="images/protectors-icon.jpg" alt="Screen Protectors">' },
-    apple: { name: "Apple", tagline: "Genuine Apple devices and accessories.", icon: '<img src="images/apple-icon.jpg" alt="Apple">' },
-    cables: { name: "Cables", tagline: "Fast charging, built to last.", icon: '<img src="images/cables-icon.jpg" alt="Cables">' },
-    powerbanks: { name: "Power Banks", tagline: "More power, more freedom.", icon: '<img src="images/powerbanks-icon.jpg" alt="Power Banks">' },
+    cases: { name: "Phone Cases", tagline: "Protection meets style.", icon: '<img src="images/cases-category.jpg" alt="Phone Cases">' },
+    chargers: { name: "Chargers", tagline: "Power up safely, anytime.", icon: '<img src="images/chargers-category.jpg" alt="Chargers">' },
+    protectors: { name: "Screen Protectors", tagline: "Crystal clear protection.", icon: '<img src="images/protectors-category.jpg" alt="Screen Protectors">' },
+    apple: { name: "Apple", tagline: "Genuine Apple devices and accessories.", icon: '<img src="images/apple-category.jpg" alt="Apple">' },
+    cables: { name: "Cables", tagline: "Fast charging, built to last.", icon: '<img src="images/cables-category.jpg" alt="Cables">' },
+    powerbanks: { name: "Power Banks", tagline: "More power, more freedom.", icon: '<img src="images/powerbanks-category.jpg" alt="Power Banks">' },
     magsafe: { name: "MagSafe", tagline: "Snap. Charge. Go.", icon: icon('bolt', 28) },
     audio: { name: "Headphones & AirPods", tagline: "Sound that moves you.", icon: icon('headphones', 28) },
     car: { name: "Car Accessories", tagline: "Drive smart, charge smart.", icon: icon('car', 28) },
